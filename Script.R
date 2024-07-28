@@ -17,7 +17,7 @@ biblioshiny()
 
 ## CARREGAR O ARQUIVO
 
-file_path <- "C:/Users/vitor/Downloads/(retirado reply) TRATADO WoS_Scopus.xlsx"
+file_path <- "C:/Users/vitor/Downloads/WoS_Scopus.xlsx"
 data <- read.xlsx(file_path, sheet = 1)
 
 
