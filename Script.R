@@ -85,9 +85,9 @@ write.xlsx(data_uninew, output_file_path, sheetName = "tratado Wos scopus", over
 head(data$DE)
 
 
-palavras_chave_OL <- c("Ocean Literacy", "Cultura Oceânica")
-palavras_chave_CL <- c("Climate Literacy", "Climate Change Literacy")
-palavras_chave_EL <- c("Energy Literacy")
+palavras_chave_OL <- c("Ocean Literacy", "Marine Education")
+palavras_chave_CL <- c("Climate Literacy", "Climate Change Education")
+palavras_chave_EL <- c("Energy Literacy", "Energy Education" )
 
 padrao_OL <- paste0("(^|; )(", paste(palavras_chave_OL, collapse = "|"), ")(;|$)")
 padrao_CL <- paste0("(^|; )(", paste(palavras_chave_CL, collapse = "|"), ")(;|$)")
