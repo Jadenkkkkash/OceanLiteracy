@@ -74,7 +74,7 @@ data_uninew <- data_unique %>%
 ## CARREGAR O ARQUIVO PARA BAIXAR
 
 output_file_path <- "C:/Users/vitor/Downloads"
-write.xlsx(data_uninew, output_file_path, sheetName = "tratado Wos scopus", overwrite = TRUE)
+write.xlsx(data_uninew, file_path, sheetName = "tratado Wos scopus", overwrite = TRUE)
 
 
 ######### ATÉ AQUI OS DADOS FORAM TRATADOS #########
@@ -84,7 +84,7 @@ write.xlsx(data_uninew, output_file_path, sheetName = "tratado Wos scopus", over
 
 #definindo palavras-chave
 
-head(data$DE)
+head(data_uninew$DE)
 
 
 palavras_chave_OL <- c("Ocean Literacy", "Marine Education")
@@ -107,7 +107,7 @@ data_filtrada_EL <- data_uninew %>%
   filter(str_detect(DE, padrao_EL))
 
 
-write.xlsx(data_filtrada_OL, output_file_path, sheetName = "OL", overwrite = TRUE)
-write.xlsx(data_filtrada_CL, output_file_path, sheetName = "CL", overwrite = TRUE)
-write.xlsx(data_filtrada_EL, output_file_path, sheetName = "EL", overwrite = TRUE)
+write.xlsx(data_filtrada_OL, file_path, sheetName = "OL", overwrite = TRUE)
+write.xlsx(data_filtrada_CL, file_path, sheetName = "CL", overwrite = TRUE)
+write.xlsx(data_filtrada_EL, file_path, sheetName = "EL", overwrite = TRUE)
 
