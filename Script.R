@@ -41,6 +41,8 @@ remove_parentheses <- function(text) {
 
 data_unique$AF <- sapply(data_unique$AF, remove_parentheses)
 
+data_unique[data_unique == ""] <- NA
+data_unique[data_unique == "NULL"] <- NA
 
 ##CONFERE
 
@@ -108,3 +110,4 @@ data_filtrada_EL <- data_uninew %>%
 write.xlsx(data_filtrada_OL, output_file_path, sheetName = "OL", overwrite = TRUE)
 write.xlsx(data_filtrada_CL, output_file_path, sheetName = "CL", overwrite = TRUE)
 write.xlsx(data_filtrada_EL, output_file_path, sheetName = "EL", overwrite = TRUE)
+
