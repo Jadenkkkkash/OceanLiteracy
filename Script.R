@@ -2,14 +2,12 @@ install.packages("bibliometrix")
 install.packages("openxlsx")
 install.packages("dplyr")
 install.packages("stringr")
-install.packages("openxlsx")
 
 
 library(bibliometrix)
 library(openxlsx)
 library(dplyr)
 library(stringr)
-library(openxlsx)
 
 
 biblioshiny()
