@@ -114,8 +114,14 @@ write.xlsx(data_filtrada_EL, output_file_path, sheetName = "EL", overwrite = TRU
 
 palavras_chave_OL_CL <- c("Ocean Literacy", "Cultura Oceânica","Climate Literacy", "Climate Change Literacy")
 
-padrao_OL <- paste0("(^|; )(", paste(palavras_chave_OL_CL, collapse = "|"), ")(;|$)")
+padrao_OL_CL <- paste0("(^|; )(", paste(palavras_chave_OL_CL, collapse = "|"), ")(;|$)")
 
-OL_CL <- data_uninew %>%
+data_filtrada_OL_CL <- data %>%
   filter(str_detect(DE, padrao_OL_CL))
+
+## usei pra ter certeza
+data_filtrada_OL_CL <- data_filtrada_OL_CL %>%
+  distinct(TI, .keep_all = TRUE)
+
+write.xlsx(data_filtrada_OL_CL, output_file_path, sheetName = "OL_CL", overwrite = TRUE)
 
