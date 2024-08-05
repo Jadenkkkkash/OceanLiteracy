@@ -15,7 +15,7 @@ biblioshiny()
 
 ## CARREGAR O ARQUIVO
 
-file_path <- "C:/Users/vitor/Downloads/WoS_Scopus.xlsx"
+file_path <- " ##adiciona o arquivo##"
 data <- read.xlsx(file_path, sheet = 1)
 
 
@@ -71,8 +71,8 @@ data_uninew <- data_unique %>%
 
 ## CARREGAR O ARQUIVO PARA BAIXAR
 
-output_file_path <- "C:/Users/vitor/Downloads"
-write.xlsx(data_uninew, file_path, sheetName = "tratado Wos scopus", overwrite = TRUE)
+output_file_path <- "##Local que deseja adicionar o arquivo##"
+write.xlsx(data_uninew, output_file_path, sheetName = "tratado Wos scopus", overwrite = TRUE)
 
 
 ######### ATÉ AQUI OS DADOS FORAM TRATADOS #########
@@ -105,7 +105,17 @@ data_filtrada_EL <- data_uninew %>%
   filter(str_detect(DE, padrao_EL))
 
 
-write.xlsx(data_filtrada_OL, file_path, sheetName = "OL", overwrite = TRUE)
-write.xlsx(data_filtrada_CL, file_path, sheetName = "CL", overwrite = TRUE)
-write.xlsx(data_filtrada_EL, file_path, sheetName = "EL", overwrite = TRUE)
+write.xlsx(data_filtrada_OL, output_file_path, sheetName = "OL", overwrite = TRUE)
+write.xlsx(data_filtrada_CL, output_file_path, sheetName = "CL", overwrite = TRUE)
+write.xlsx(data_filtrada_EL, output_file_path, sheetName = "EL", overwrite = TRUE)
+
+
+## Criação da planilha o OL com CL
+
+palavras_chave_OL_CL <- c("Ocean Literacy", "Cultura Oceânica","Climate Literacy", "Climate Change Literacy")
+
+padrao_OL <- paste0("(^|; )(", paste(palavras_chave_OL_CL, collapse = "|"), ")(;|$)")
+
+OL_CL <- data_uninew %>%
+  filter(str_detect(DE, padrao_OL_CL))
 
