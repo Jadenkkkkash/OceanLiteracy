@@ -1,0 +1,32 @@
+install.packages("dplyr")
+install.packages("stringr")
+install.packages("openxlsx")
+
+
+library(dplyr)
+library(stringr)
+library(openxlsx)
+
+file_path <- # "C:localização_do_arquivo_aquivo.xlsx"
+file_path_local <- #"C:local_para_adicionar_arquivos"
+df <- read.xlsx(file_path, sheet = 1)
+
+
+# Criando uma nova coluna com a parte da string após a última vírgula
+df <- df %>%
+  mutate(apos_ultima_virgula = str_trim(str_extract(RP, "[^,]+$")))
+
+#apagar tudo após ;
+df <- df %>%
+  mutate(frase_limpa = str_extract(apos_ultima_virgula, "^[^;]*"))
+
+#primeira letra da palavra em capslock
+df <- df %>%
+  mutate(frase_formatada = str_to_title(tolower(frase_limpa)))
+
+
+write.xlsx(df, file_path_local, sheetName = "tabela com países", overwrite = TRUE)
+
+# Exibir o resultado
+print(df)
+
