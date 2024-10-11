@@ -21,6 +21,14 @@ country_distribution <- df_unique %>%
   summarise(Publications = n()) %>%
   arrange(desc(Publications))  # Ordenar por número de publicações
 
+
+country_distribution <- country_distribution %>%
+  mutate(RP = case_when(
+    RP == "United States" ~ "USA",
+## RP == "United Kingdom" ~ "UK", ver se usa isso
+    TRUE ~ RP
+  ))
+
 # Visualizar os dados
 print(country_distribution)
 view(country_distribution)
