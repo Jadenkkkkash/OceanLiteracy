@@ -64,3 +64,6 @@ ggplot(data = map_data, aes(x = long, y = lat, group = group)) +
   theme_minimal() +
   scale_fill_gradient(low = "lightblue", high = "darkblue", limits = c(0, max_publications+5), na.value = "grey50")+
   theme(legend.position = "bottom")
+
+ggsave("mapa_publicacoes_alta_resolucao.png", plot = last_plot(), width = 15, height = 10, dpi = 300)
+
