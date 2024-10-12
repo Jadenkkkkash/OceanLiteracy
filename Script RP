@@ -2,11 +2,14 @@ install.packages("ggplot2")
 install.packages("dplyr")
 install.packages("maps")
 install.packages("ggmap")
+install.packages("openxlsx")
+
 
 library(ggplot2)
 library(dplyr)
 library(maps)
 library(ggmap)
+library(openxlsx)
 
 df <- read.xlsx("C:/Users/UFES/Downloads/dados_C1_university.xlsx")
 
@@ -48,8 +51,6 @@ max_publications <- max(country_distribution$Publications, na.rm = TRUE)
 
 
 world_map <- map_data("world")
-country_distribution$Country <- tolower(country_distribution$Country)
-
 
 map_data <- world_map %>%
   left_join(country_distribution, by = c("region" = "RP"))
