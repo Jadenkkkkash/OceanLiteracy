@@ -69,6 +69,8 @@ country_distribution_OL <- country_distribution_OL %>%
 country_distribution_CL <- country_distribution_CL %>%
   mutate(RP = case_when(
     RP == "United States" ~ "USA",
+        RP == "United Kingdom" ~ "UK",
+
     TRUE ~ RP
   ))
 
