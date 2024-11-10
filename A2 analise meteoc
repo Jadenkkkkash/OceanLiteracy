@@ -1,0 +1,77 @@
+install.packages("FactoMineR")
+install.packages("ade4")
+install.packages("ExPosition")
+library(openxlsx)
+library(FactoMineR)
+library(ade4)
+library(ExPosition)
+library(dplyr)
+
+
+
+dados <- read.xlsx ("C:/Users/vitor/Downloads/dados_C1_university.xlsx")
+
+dados_all <- read.xlsx ("C:/Users/vitor/Downloads/Copy_of_ALL.xlsx")
+
+
+# Transformando as variáveis em fatores
+dados$RP <- as.factor(dados$RP)
+dados$SO <- as.factor(dados$SO)
+dados$OL_CL <- as.factor(dados$OL_CL)
+dados$Nome_Universidade <- as.factor(dados$Nome_Universidade)
+dados$PY <- as.factor(dados$PY)
+dados$TI <- as.factor(dados$TI)
+                      
+
+dados_all$SO <- as.factor(dados_all$SO)
+dados_all$OL_CL <- as.factor(dados_all$OL_CL)
+dados_all$PY <- as.factor(dados_all$PY)
+
+
+tabela_contingencia <- table(dados_all$PY, dados_all$OL_CL)
+
+
+
+View(tabela_contingencia)
+
+
+# Contagem das ocorrências das palavras
+contagem <- table(dados_all$PY, dados_all$OL_CL)
+
+# Transformando em data frame
+contagem_df <- as.data.frame(contagem)
+colnames(contagem_df) <- c("Ano", "Palavra", "Frequencia")
+
+# Ajustando um modelo de regressão para a palavra "Ocean Literacy"
+modelo_ocean <- lm(Frequencia ~ Ano, data = subset(contagem_df, Palavra == "Ocean Literacy"))
+summary(modelo_ocean)
+
+# Ajustando um modelo de regressão para a palavra "Climate Literacy"
+modelo_climate <- lm(Frequencia ~ Ano, data = subset(contagem_df, Palavra == "Climate Literacy"))
+summary(modelo_climate)
+
+
+
+tabela_contingencia <- na.omit(tabela_contingencia)
+
+
+
+mca_result <- MCA(tabela_contingencia, graph = TRUE)
+
+
+
+
+
+mca_teste <- dados_all[, c("PY", "OL_CL")]
+
+
+
+
+
+# Executar a ACM
+resultado_acm <- MCA(mca_teste, graph = TRUE)
+
+
+
+resultado_acm$eig
+resultado_acm$call
