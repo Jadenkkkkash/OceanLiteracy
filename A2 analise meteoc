@@ -54,6 +54,20 @@ summary(modelo_climate)
 
 tabela_contingencia <- na.omit(tabela_contingencia)
 
+View (tabela_contingencia)
+
+
+install.packages("reshape2")
+library(reshape2)
+
+
+
+
+
+
+tab_contin <- dcast(tabela_contingencia, Var1 ~ Var2, value.var = "Freq", sum)
+
+
 
 
 mca_result <- MCA(tabela_contingencia, graph = TRUE)
@@ -75,3 +89,24 @@ resultado_acm <- MCA(mca_teste, graph = TRUE)
 
 resultado_acm$eig
 resultado_acm$call
+
+
+
+############### TENTANDO DENOVO
+
+
+dados_quantipubli <- read.xlsx("C:/Users/vitor/Downloads/quanti_publi.xlsx")
+
+dados_quantipubli$ANO <- as.factor(dados_quantipubli$ANO)
+dados_quantipubli$TOT <- as.factor(dados_quantipubli$TOT)
+dados_quantipubli$OL <- as.factor(dados_quantipubli$OL)
+dados_quantipubli$CL <- as.factor(dados_quantipubli$CL)
+
+
+tabela1 <- table (dados_quantipubli$TOT, dados_quantipubli$CL)
+
+chisq.res <- chisq.test(tabela1)
+chisq.res
+
+
+
