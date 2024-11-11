@@ -1,0 +1,51 @@
+install.packages("FactoMineR")
+install.packages("ade4")
+install.packages("ExPosition")
+library(openxlsx)
+library(FactoMineR)
+library(ade4)
+library(ExPosition)
+library(dplyr)
+library(tidyverse)
+
+
+
+
+dados <- read.xlsx ("C:/Users/vitor/Downloads/dados_C1_university.xlsx")
+
+dados_expandido <- dados %>%
+  separate_rows(DE, sep = ";") %>% # Separar as keywords em linhas
+  mutate(presente = 1) %>% # Marcar presença
+  pivot_wider(names_from = DE, values_from = presente, values_fill = list (0)) # Transformar em colunas binárias
+
+
+
+
+dados_filtrado <- dados_expandido %>%
+  select(RP:'Marine Education', -SO, -PY, -TC, -DB, -OL_CL)
+
+View (dados_filtrado)
+
+dados_filtrado$RP <- as.factor(dados_filtrado$RP)
+
+
+df <- as.data.frame(dados_filtrado)
+
+
+df$RP <- as.factor(df$RP)
+
+
+
+mca_result <- MCA(df, graph = FALSE)
+
+
+
+## OUTRA FORMA
+dados_expandido <- dados %>%
+  separate_rows(DE, sep = ";") %>%
+  mutate(DE = as.character(DE))
+
+
+dados_ordenados <- dados_expandido[order(dados_expandido$DE), ]
+
+
