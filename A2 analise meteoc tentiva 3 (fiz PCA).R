@@ -56,6 +56,10 @@ colnames(df2) <- palavras_chave
 df2
 
 
+write.xlsx(df2, output_file_path, sheetName = "OL", overwrite = TRUE)
+### BAIXEI DF2 E DEI O TITULO DE DE_BIN
+
+
 for (keyword in palavras_chave) {
   df2[[keyword]] <- apply(df_keyw, 1, function(row) ifelse(keyword %in% row, 1, 0))
 }
