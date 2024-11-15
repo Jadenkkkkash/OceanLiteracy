@@ -56,6 +56,14 @@ mca_result <- MCA(results_df, graph = FALSE)
 
 summary(mca_result)
 
+View(mca_result$var$coord)
+head(mca_result$var$contrib, n = 20)
+
+mca_coord <- mca_result$var$coord
+
+write.xlsx(mca_coord, "C:/Users/vitor/Downloads", sheetName = "OL", overwrite = TRUE)
+
+
 fviz_mca_ind(mca_result, 
              repel = TRUE, 
              col.ind = "darkred") 
