@@ -64,6 +64,45 @@ mca_coord <- mca_result$var$coord
 write.xlsx(mca_coord, "C:/Users/vitor/Downloads", sheetName = "OL", overwrite = TRUE)
 
 
+res.mca <- mca_result
+
+
+contribuicoes <- res.mca$var$contrib
+coordenadas <- res.mca$var$coord
+cos2 <- res.mca$var$cos2
+v_test <- res.mca$var$v.test
+
+resultados_completos <- data.frame(
+  Coordenadas_Dim1 = coordenadas[,1],
+  Coordenadas_Dim2 = coordenadas[,2],
+  Coordenadas_Dim3 = coordenadas[,3],
+  Coordenadas_Dim4 = coordenadas[,4],
+  Coordenadas_Dim5 = coordenadas[,5],
+  Contribuicao_Dim1 = contribuicoes[,1],
+  Contribuicao_Dim2 = contribuicoes[,2],
+  Contribuicao_Dim3 = contribuicoes[,3],
+  Contribuicao_Dim4 = contribuicoes[,4],
+  Contribuicao_Dim5 = contribuicoes[,5],
+  Cos2_Dim1 = cos2[,1],
+  Cos2_Dim2 = cos2[,2],
+  Cos2_Dim3 = cos2[,3],
+  Cos2_Dim4 = cos2[,4],
+  Cos2_Dim5 = cos2[,5],
+  VTest_Dim1 = v_test[,1],
+  VTest_Dim2 = v_test[,2],
+  VTest_Dim3 = v_test[,3],
+  VTest_Dim4 = v_test[,4],
+  VTest_Dim5 = v_test[,5]
+)
+
+# Exibindo a tabela
+resultados_completos
+
+
+write.xlsx(resultados_completos, "C:/Users/vitor/Downloads", sheetName = "OL", overwrite = TRUE)
+
+
+
 fviz_mca_ind(mca_result, 
              repel = TRUE, 
              col.ind = "darkred") 
