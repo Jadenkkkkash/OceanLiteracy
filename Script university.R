@@ -34,9 +34,33 @@ universidades_comuns <- intersect(contagem_universidades_CL$Nome_Universidade, c
 
 universidades_comuns <- tibble(universidades_comuns)
 
-
-
 View (universidades_comuns)
+
+
+############ NOVA FORMA DE FAZER
+
+colnames(contagem_universidades_OL)[2] <- "count_OL"
+colnames(contagem_universidades_CL)[2] <- "count_CL"
+
+
+combined_data <- full_join(
+  contagem_universidades_OL, contagem_universidades_CL, 
+  by = "Nome_Universidade"
+)
+
+combined_data[sapply(combined_data, is.numeric)] <- 
+  lapply(combined_data[sapply(combined_data, is.numeric)], function(x) {replace(x, is.na(x), 0)})
+
+## na.omit depois de transformar os NA numerico em 0
+combined_data <- na.omit(combined_data)
+
+data_numeric <- combined_data[, -1]
+
+correlation <- cor.test(data_numeric$count_OL, data_numeric$count_CL)
+print(correlation)
+
+
+write.xlsx(combined_data, "C:/Users/vitor/Downloads", sheetname= "contCL", overwrite = TRUE)
 
 
 
