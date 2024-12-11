@@ -1,5 +1,3 @@
-
-
 anos <- seq(2000, 2024)  # Anos de 2010 a 2020
 artigos <- c(0, 0, 2, 0, 0, 2, 1, 2, 8, 3, 4, 11, 3, 14, 24, 17, 14, 24, 28, 48, 47, 64, 93, 87, 54)  # Quantidade de artigos
 
@@ -36,7 +34,7 @@ library(zoo)
 
 
 
-anomalias <- dados$anomalia_acumulada
+anomalias <- dados$anomalia
 
 
 resultado_mk <- MannKendall(anomalias)
