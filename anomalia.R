@@ -76,4 +76,119 @@ resultado_mk <- MannKendall(anomalias_2015)
 resultado_mk
 
 
+##CLIMATE LITERACY
 
+anos <- seq(2000, 2024)  # Anos de 2010 a 2020
+artigos_CL <- c(0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 6, 1, 3, 2, 3, 11, 9, 8, 13, 8, 8)  # Quantidade de artigos
+
+dados <- data.frame(anos, artigos_CL)
+
+media_historica <- mean(dados$artigos_CL)
+
+dados$anomalia <- dados$artigos_CL - media_historica
+
+dados$anomalia_acumulada <- cumsum(dados$anomalia)
+
+print(dados)
+
+
+plot(dados$anos, dados$anomalia_acumulada, type="o", col="blue",
+     xlab="Anos", ylab="Anomalia Acumulativa",
+     main="Anomalia Acumulativa de Artigos ao longo dos Anos")
+
+
+install.packages("openxlsx")
+library(openxlsx)
+
+write.xlsx(dados, file = "C:/Users/vitor/Downloads", SheetName= "Anomalias")
+
+
+## REALIZANDO TESTE DE MANN KENDALL PARA CADA PONTO
+
+
+install.packages("Kendall")
+install.packages("zoo")
+
+library(Kendall)
+library(zoo)
+
+
+
+anomalias <- dados$anomalia
+
+
+resultado_mk <- MannKendall(anomalias)
+resultado_mk
+
+
+### a partir daqui não deu certo o código
+
+dados2 <- dados[, c("anos", "anomalia_acumulada")]
+
+
+
+resultados_mk2 <- rollapply(dados2, width = 3, FUN = function(x) {
+  test <- MannKendall(x)
+  return(test$sl)  # Valor p da estatística de Mann-Kendall
+}, by = 1, align = "center")
+
+
+
+
+### OCEAN LITERACY
+
+##CLIMATE LITERACY
+
+anos <- seq(2000, 2024)  # Anos de 2010 a 2020
+artigos_OL <- c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 3, 2, 2, 3, 3, 18, 10, 15, 20, 21, 13)  # Quantidade de artigos
+
+dados <- data.frame(anos, artigos_OL)
+
+media_historica <- mean(dados$artigos_OL)
+
+dados$anomalia <- dados$artigos_OL - media_historica
+
+dados$anomalia_acumulada <- cumsum(dados$anomalia)
+
+print(dados)
+
+
+plot(dados$anos, dados$anomalia_acumulada, type="o", col="blue",
+     xlab="Anos", ylab="Anomalia Acumulativa",
+     main="Anomalia Acumulativa de Artigos ao longo dos Anos")
+
+
+install.packages("openxlsx")
+library(openxlsx)
+
+write.xlsx(dados, file = "C:/Users/vitor/Downloads", SheetName= "Anomalias")
+
+
+## REALIZANDO TESTE DE MANN KENDALL PARA CADA PONTO
+
+
+install.packages("Kendall")
+install.packages("zoo")
+
+library(Kendall)
+library(zoo)
+
+
+
+anomalias <- dados$anomalia
+
+
+resultado_mk <- MannKendall(anomalias)
+resultado_mk
+
+
+### a partir daqui não deu certo o código
+
+dados2 <- dados[, c("anos", "anomalia_acumulada")]
+
+
+
+resultados_mk2 <- rollapply(dados2, width = 3, FUN = function(x) {
+  test <- MannKendall(x)
+  return(test$sl)  # Valor p da estatística de Mann-Kendall
+}, by = 1, align = "center")
