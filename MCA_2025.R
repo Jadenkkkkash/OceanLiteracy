@@ -97,3 +97,67 @@ mca_result$var$coord[,6]
 head(mca_result$var$coord[, 1:6], 20)        
 head(mca_result$var$contrib[, 1:6], 20)    
 head(mca_result$var$cos2[, 1:6], 20)        
+
+
+#### GRAFICOS
+
+
+fviz_mca_var(mca_result, repel = TRUE)
+
+
+
+## salve graficos
+library(ggplot2)
+ggsave("grafico_mca.png", width = 10, height = 8, dpi = 300)
+
+
+
+
+fviz_mca_var(mca_result, axes = c(1,2),  repel = TRUE)
+  iz_mca_var(mca_result, axes = c(1, 6), repel = TRUE)
+
+
+
+## GRAFICO SO AS VARIAVEIS
+fviz_mca_var(mca_result, choice = "var", axes = c(1, 2), repel = TRUE)
+
+
+##SO INDIVIDUOS
+fviz_mca_ind(mca_result, axes = c(1, 2), repel = TRUE)
+
+
+## MISTO (CATEGORIA + INDIVIDUO)
+
+fviz_mca_biplot(mca_result, repel = TRUE)
+
+
+
+
+
+## ESCOLHER MELHORES REPRRESENTAÇÕES (VER AUTOVALOR)
+
+eig.val <- get_eigenvalue(mca_result)
+print(eig.val)
+
+
+
+######PLANILHA
+
+# Coordenadas das categorias
+coords_var <- mca_result$var$coord
+
+# Contribuições das categorias para as dimensões
+contrib_var <- mca_result$var$contrib
+
+# Cos2 (qualidade da representação)
+cos2_var <- mca_result$var$cos2
+
+# Vtest
+v.test <- mca_result$var$v.test
+
+# Coordenadas dos indivíduos
+coords_ind <- mca_result$ind$coord
+
+
+
+write.xlsx(v.test, "C:/Users/Windows/Downloads/", sheetName = "OL", overwrite = TRUE)
